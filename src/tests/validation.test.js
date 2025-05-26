@@ -1,5 +1,5 @@
 import { isCartItem, isProduct } from "../validation.js"
-// Examples of a valid product and a valid cart item. You may use these when testing below.
+
 const exampleProduct = {
 	id: 1001,
 	name: 'Badanka',
@@ -12,25 +12,42 @@ const exampleCartObject = {
 	item: exampleProduct
 }
 
-// Group tests using "describe"
 describe('Validation', () => {
-
-	// Använd en "test" eller "it" (de är synonymer) för varje testfall
-	/* Exempel på syntax:
-	test('beskriv testfallet', () => {
-		// här skriver du testkoden
-		// avsluta alltid med "expect"
+	test ('returns true for a valid cart object', () => {
+		expect(isCartItem(exampleCartObject)).toBe(true)
 	})
-	*/
 
+	test ('returns false for an invalid cart object', () => {
+		const invalidCartItems = [
+      {}, 
+      { id: 2002, amount: 1 }, 
+      { id: 2002, item: exampleProduct },
+      { id: 2002, amount: 0, item: exampleProduct },
+      { id: 2002, amount: 1, item: {} }, 
+      { id: 2002, amount: 1, item: { id: 1002, name: 'Test' } },
+    ];
 
-	// ---------------------------------------------
-	// Följande testfall ska du implementera. Det är tillåtet att använda Joi. Gör i så fall ett schema för varje sorts objekt du vill kunna validera. Du får även ändra texten och du t.ex. vill skriva på svenska i stället för engelska.
-	// (Ta bort dessa kommentarer när du är klar)
+    invalidCartItems.forEach((item) => {
+      expect(isCartItem(item)).toBe(false);
+    });
+  	});
 
-	// 1. it returns true for a valid cart object
-	// 2. it returns false for invalid cart objects
+	test ('returns true for a valid product', () => {
+		expect(isProduct(exampleProduct)).toBe(true)
+	})
+	
+	test ('returns false for an invalid produkt', () => {
+		const invalidProducts = [
+	  {}, 
+	  { id: 1002, name: 'Test' }, 
+	  { id: 1002, price: 50 }, 
+	  { name: 'Test', price: 50 }, 
+	  { id: 1002, name: 'Test', price: -10 }
+	];
 
-	// 3. it returns true for a valid product
-	// 4. it returns false for invalid cart objects
+	invalidProducts.forEach((product) => {
+	  expect(isProduct(product)).toBe(false);
+	});
+	});
+
 })
