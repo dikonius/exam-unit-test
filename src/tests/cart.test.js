@@ -65,18 +65,18 @@ describe('function getItem', () => {
 	});
 })
 
-describe('function getTotalValue', () => {
+describe('function getTotalCartValue', () => {
 
 	beforeEach(() => { 
 		clearCart()
 	})
 
-	test('getTotalValue calculates price for a single item', () => {
+	test('getTotalCartValue calculates price for a single item', () => {
 		addToCart({ id: 1001, name: 'badanka', price: 20 });
 		expect(getTotalCartValue()).toBe(20);
 	});
 
-	test('getTotalValue calculates total price for multiple items', () => {
+	test('getTotalCartValue calculates total price for multiple items', () => {
 		addToCart({ id: 1001, name: 'badanka', price: 20 });
 		addToCart({ id: 1002, name: 'vattenpistol', price: 40 });
 		addToCart({ id: 1003, name: 'badboll', price: 30 });
@@ -197,3 +197,18 @@ describe('function editCart(itemId, newValues)', () => {
 	})
 })
 
+describe('function clearCart()', () => {
+	beforeEach(() => { 
+		clearCart()
+	})
+
+	test('clearCart empties the cart', () => {
+		addToCart({ id: 1001, name: 'badanka', price: 20 })
+		addToCart({ id: 1002, name: 'vattenpistol', price: 40 })
+
+		expect(getCartItemCount()).toBe(2)
+		clearCart()
+		expect(getCartItemCount()).toBe(0)
+	})
+
+})

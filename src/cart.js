@@ -1,27 +1,7 @@
-/*
-Din uppgift:
-- skriv testfall för alla funktionerna nedan i cart.test.js (RED)
-- skriv kod här för att implementera funktionerna (GREEN)
-
-Tips:
-- börja med att identifiera VAD som ska testas.
-- om du testar t.ex. removeFromCart får du använda addToCart i början av testet. Den kommer nämligen ha sina egna tester
-
-*/
-// function getCartItemCount() done
-// function getItem(index) done
-// function getTotalCartValue() done
-// function addToCart(newItem) done
-// function removeFromCart(itemId) done
-// function editCart(itemId, newValues) done
-// function clearCart()
-// -------------------------------------------------- //
-
-import { isCartItem, isProduct } from "./validation.js"
+import { isProduct } from "./validation.js"
 
 let cart = []
 let idCounter = 2002
-// -------------------------------------------------- //
 
 function getCartItemCount() {
 	return cart.length
