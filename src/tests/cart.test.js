@@ -1,14 +1,11 @@
 import { addToCart, getCartItemCount, clearCart, getItem, getTotalCartValue } from "../cart"
 
 
-describe('Cart', () => {
+describe('function getCartItem', () => {
+
 	beforeEach(() => {
 		clearCart()
 	})
-
-	
-
-	// Skriv dina testfall här
 
 	test('getCartItemCount returns 0 when cart is empty', () => {
 		const itemCount = getCartItemCount()
@@ -28,6 +25,14 @@ describe('Cart', () => {
 		const result = addToCart(product)
 		expect(result).toBe(false)
 		})
+	})
+})
+
+
+describe('function getItem', () => {
+
+	beforeEach(() => { 
+		clearCart()
 	})
 
 	test('getItem returns item at the specified index', () => {
@@ -51,6 +56,13 @@ describe('Cart', () => {
 			item: { id: 1003, name: 'badboll', price: 30 }
 		});
 	});
+})
+
+describe('function getTotalValue', () => {
+
+	beforeEach(() => { 
+		clearCart()
+	})
 
 	test('getTotalValue calculates price for a single item', () => {
 		addToCart({ id: 1001, name: 'badanka', price: 20 });
@@ -63,15 +75,18 @@ describe('Cart', () => {
 		addToCart({ id: 1003, name: 'badboll', price: 30 });
 		expect(getTotalCartValue()).toBe(90); 
 	})
+})
 
+describe('function addToCart', () => {
 
-	// Du får ett test att börja med
+	beforeEach(() => { 
+		clearCart()
+	})
+	
 	test('addToCart lägger till en ny produkt i kundvagnen', () => {
 		const itemCountBefore = getCartItemCount()
 		const input = { id: 1002, name: 'Vattenpistol', price: 40 }
 
-		// addToCart returnerar inget - den påverkar kundvagnen
-		// vi behöver använda getCartItemCount för att se om det har lagts till en ny produkt i kundvagnen
 		addToCart(input)
 		const itemCountAfter = getCartItemCount()
 
