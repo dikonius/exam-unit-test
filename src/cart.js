@@ -11,9 +11,9 @@ Tips:
 // function getCartItemCount() done
 // function getItem(index) done
 // function getTotalCartValue() done
-// function addToCart(newItem)
-// function removeFromCart(itemId)
-// function editCart(itemId, newValues)
+// function addToCart(newItem) done
+// function removeFromCart(itemId) done
+// function editCart(itemId, newValues) done
 // function clearCart()
 // -------------------------------------------------- //
 
@@ -27,13 +27,9 @@ function getCartItemCount() {
 	return cart.length
 }
 
-
 function clearCart() {
 	cart = []
-	idCounter = 2002
 }
-// Din kod börjar här
-// Du får en funktion att börja med
 
 function getItem(index) {
 	if (index < 0 || index >= cart.length) {
@@ -48,8 +44,6 @@ function getTotalCartValue() {
 	}, 0)
 }
 
-
-
 function addToCart(newItem) {
 	if( !isProduct(newItem) ) {
 		return false
@@ -60,8 +54,36 @@ function addToCart(newItem) {
 	cart.push(cartItem)
 }
 
+function removeFromCart(itemId) {
+	const index = cart.findIndex(cartItem => cartItem.item.id === itemId)
+	if (index !== -1) {
+		cart.splice(index, 1)
+		return true
+	}
+	return false
+}
+
+function editCart(itemId, newValues) {
+	const index = cart.findIndex(cartItem => cartItem.item.id === itemId)
+	if (index !== -1) {
+		const cartItem = cart[index]
+		if (newValues.amount !== undefined) {
+			cartItem.amount = newValues.amount
+		}
+		if (newValues.item !== undefined) {
+			if (isProduct(newValues.item)) {
+				cartItem.item = newValues.item
+			} else {
+				return false
+			}
+		}
+		return true
+	}
+	return false
+}
 
 
 
 
-export { getCartItemCount, addToCart, clearCart, getItem, getTotalCartValue }
+
+export { getCartItemCount, addToCart, clearCart, getItem, getTotalCartValue, removeFromCart, editCart }
